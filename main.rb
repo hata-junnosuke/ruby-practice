@@ -1,16 +1,22 @@
 def janken
-    count = 0  
+    n = 0  
 
     puts "何本勝負？(press 1 or 3 or 5)"
-    count = gets.chomp.to_i
-    puts "#{count}本勝負を選びました"
+    n = gets.chomp.to_i
+    
+    if n == 1 || n == 3 || n == 5
+        puts "#{n}本勝負を選びました"
+    else
+        puts "1か3か5を押してください"
+        return janken
+    end
 
     #回数と勝ち負けの数
     c = 0
     w = 0
     l = 0
 
-    until count == c do  
+    until n == c do  
         puts "#{c+1}本目"
         puts "じゃんけん・・・(press g or c or p)"
         puts "[g]グー\n[c]チョキ\n[p]パー"
@@ -18,6 +24,12 @@ def janken
         you = gets.chomp
         cpu = rand(3)
 
+        unless you == "g" || you == "c" || you == "p"
+            puts "指示に従えないあなたの反則負けです。"
+            exit!
+        end
+
+        
         #数字に変換
         if you == "g"
             you = 0
@@ -45,7 +57,7 @@ def janken
             puts "#{w}勝#{l}敗"
         end
 
-        if count == c
+        if n == c
             puts "結果"
             if w > l
                 puts "#{w}勝#{l}敗であなたの勝ち"
